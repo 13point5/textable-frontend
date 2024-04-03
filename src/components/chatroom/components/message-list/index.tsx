@@ -4,12 +4,16 @@ export const MessageList = () => {
   return (
     <div className="flex-1 flex flex-col gap-2 p-2">
       <div className="flex flex-col gap-2 overflow-auto">
-        <MessageItem message="Hello! \n lala" sent={true} />
+        {Array.from({ length: 20 }).map((_, index) => (
+          <MessageItem message={`Message ${index}`} sent={index % 2 === 0} />
+        ))}
+
+        {/* <MessageItem message="Hello! \n lala" sent={true} />
         <MessageItem message="Hi!" sent={false} />
         <MessageItem
           message="Hello! \n lala lorem slfjnvlsfnvsfnvfsljkvnsfljnvsflnvskfnvlfsjnvlfjsvnbsfljbvnlfsbnvklsfbnvkljsfbnvkljfs"
           sent={true}
-        />
+        /> */}
 
         {/* <div className="flex gap-2 items-center">
           <img
