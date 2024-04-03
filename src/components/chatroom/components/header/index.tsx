@@ -8,7 +8,7 @@ export const Header = () => {
         <ArrowLeftIcon />
       </Button>
 
-      <p className="text-lg font-medium">CocoBot</p>
+      <p className="text-lg font-medium">CocoBot2</p>
 
       <Button variant="ghost" size="icon">
         <MenuIcon />

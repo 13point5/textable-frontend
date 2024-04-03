@@ -7,35 +7,6 @@ export const MessageList = () => {
         {Array.from({ length: 20 }).map((_, index) => (
           <MessageItem message={`Message ${index}`} sent={index % 2 === 0} />
         ))}
-
-        {/* <MessageItem message="Hello! \n lala" sent={true} />
-        <MessageItem message="Hi!" sent={false} />
-        <MessageItem
-          message="Hello! \n lala lorem slfjnvlsfnvsfnvfsljkvnsfljnvsflnvskfnvlfsjnvlfjsvnbsfljbvnlfsbnvklsfbnvkljsfbnvkljfs"
-          sent={true}
-        /> */}
-
-        {/* <div className="flex gap-2 items-center">
-          <img
-            src="https://avatars.dicebear.com/api/avataaars/1.svg"
-            alt="avatar"
-            className="w-8 h-8 rounded-full"
-          />
-          <div className="p-2 bg-slate-100 rounded-lg">
-            <p className="text-sm">Hello!</p>
-          </div>
-        </div>
-
-        <div className="flex gap-2 items-center justify-end">
-          <div className="p-2 bg-slate-100 rounded-lg">
-            <p className="text-sm">Hi!</p>
-          </div>
-          <img
-            src="https://avatars.dicebear.com/api/avataaars/2.svg"
-            alt="avatar"
-            className="w-8 h-8 rounded-full"
-          />
-        </div> */}
       </div>
     </div>
   );
