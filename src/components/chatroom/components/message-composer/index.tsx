@@ -3,7 +3,7 @@ import { ArrowRightIcon } from "lucide-react";
 
 export const MessageComposer = () => {
   return (
-    <div className="flex gap-2 items-center p-2 bg-slate-50">
+    <div className="fixed bottom-0 flex gap-2 items-center p-2 bg-slate-50">
       <input
         type="text"
         placeholder="Type a message..."
