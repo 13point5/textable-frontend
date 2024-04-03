@@ -10,7 +10,7 @@ export const Chatroom = () => {
     //   <MessageComposer />
     // </div>
 
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen max-h-screen overflow-hidden">
       {/* Header */}
       <div className="bg-blue-500 text-white p-4 fixed top-0 w-full z-10">
         Chat Header
@@ -19,7 +19,7 @@ export const Chatroom = () => {
       {/* Messages List */}
       <div className="flex-1 overflow-y-auto pt-16 pb-20">
         {/* Example messages */}
-        {Array.from({ length: 10 }).map((_, index) => (
+        {Array.from({ length: 20 }).map((_, index) => (
           <div key={index} className="m-4 p-2 bg-gray-200 rounded-lg">
             Message {index}
           </div>
