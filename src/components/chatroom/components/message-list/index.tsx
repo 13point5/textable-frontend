@@ -5,7 +5,10 @@ export const MessageList = () => {
     <div className="flex-1 flex flex-col gap-2 p-2">
       <div className="flex flex-col gap-2 overflow-auto">
         {Array.from({ length: 20 }).map((_, index) => (
-          <MessageItem message={`Message ${index}`} sent={index % 2 === 0} />
+          <MessageItem
+            message={`Message ${index} blalalalalala`}
+            sent={index % 2 === 0}
+          />
         ))}
       </div>
     </div>
