@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon, MicIcon } from "lucide-react";
 
 export const MessageComposer = () => {
   return (
@@ -9,8 +9,13 @@ export const MessageComposer = () => {
         placeholder="Type a message..."
         className="flex-1 p-2 bg-slate-50 rounded-lg"
       />
+
       <Button variant="default" size="icon">
         <ArrowRightIcon />
+      </Button>
+
+      <Button variant="default" size="icon">
+        <MicIcon />
       </Button>
     </div>
   );
