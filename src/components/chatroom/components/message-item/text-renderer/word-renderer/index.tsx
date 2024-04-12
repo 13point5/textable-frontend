@@ -3,6 +3,11 @@ import {
   WordPosition,
 } from "@/components/chatroom/components/message-item/text-renderer/context";
 import { WordRendererPopup } from "@/components/chatroom/components/message-item/text-renderer/word-renderer/popup";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { useContext } from "react";
 
 type WordProps = {
@@ -29,15 +34,19 @@ export const WordRenderer = ({ word, position }: WordProps) => {
   };
 
   return (
-    <span className="relative">
-      <span
-        onClick={handleWordClick}
-        className={`cursor-pointer ${isChosenWord && "text-orange-500"}`}
-      >
-        {word}
-      </span>
+    <Popover>
+      <PopoverTrigger>
+        <span
+          onClick={handleWordClick}
+          className={`cursor-pointer ${isChosenWord && "text-orange-500"}`}
+        >
+          {word}
+        </span>
+      </PopoverTrigger>
 
-      {isChosenWord && <WordRendererPopup word={wordWithoutPunctuation} />}
-    </span>
+      <PopoverContent className="bg-orange-200 border-none p-2 rounded-sm text-xs w-max flex flex-col items-center gap-2 mx-2">
+        <WordRendererPopup word={wordWithoutPunctuation} />
+      </PopoverContent>
+    </Popover>
   );
 };

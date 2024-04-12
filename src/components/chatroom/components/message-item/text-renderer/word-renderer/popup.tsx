@@ -9,7 +9,7 @@ type Props = {
 
 export const WordRendererPopup = ({ word }: Props) => {
   return (
-    <div className="absolute top-full left-0 mt-1 z-10 bg-orange-200 p-2 rounded-sm shadow-sm text-xs flex flex-col items-center gap-2 w-max">
+    <>
       <span className="">{word}</span>
 
       <Separator className="bg-zinc-400" />
@@ -23,6 +23,6 @@ export const WordRendererPopup = ({ word }: Props) => {
 
         <PlusIcon className="cursor-pointer w-3 h-3" />
       </div>
-    </div>
+    </>
   );
 };
