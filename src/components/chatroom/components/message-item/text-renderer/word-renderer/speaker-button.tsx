@@ -1,9 +1,9 @@
-import { CircleStopIcon, Volume2Icon } from "lucide-react";
 import { useTextToSpeech } from "@/hooks/useTextToSpeech";
+import { CircleStopIcon, Volume2Icon } from "lucide-react";
 
-type Props = { text: string };
+type SpeakButtonProps = { text: string };
 
-export const SpeakButton = ({ text }: Props) => {
+const SpeakButton = ({ text }: SpeakButtonProps) => {
   const { playing, handlePlay, handleStop } = useTextToSpeech(text);
 
   return (
@@ -25,3 +25,5 @@ export const SpeakButton = ({ text }: Props) => {
     </div>
   );
 };
+
+export default SpeakButton;
