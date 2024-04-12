@@ -1,6 +1,6 @@
 import { axiosInstance } from "@/api/axios";
 import { APIResponse } from "@/api/types";
-import { Loader2Icon } from "lucide-react";
+import { LanguagesIcon, Loader2Icon } from "lucide-react";
 import { useEffect, useState } from "react";
 import useTranslationsStore from "@/lib/translations-store";
 
@@ -74,5 +74,11 @@ export const TranslatedWord = ({ word }: Props) => {
       </span>
     );
 
-  return <span className="text-xs">{translationData.data}</span>;
+  return (
+    <div className="flex items-center gap-1">
+      <LanguagesIcon className="w-3 h-3" />
+
+      <span className="text-xs">{translationData.data}</span>
+    </div>
+  );
 };
