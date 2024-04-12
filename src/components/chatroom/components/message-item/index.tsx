@@ -1,12 +1,7 @@
-import { SpeakButton } from "@/components/chatroom/components/message-item/speak-button";
+import { ActionBar } from "@/components/chatroom/components/message-item/action-bar";
 import { TextRenderer } from "@/components/chatroom/components/message-item/text-renderer";
 import { TranslatedMessage } from "@/components/chatroom/components/message-item/translated-message";
 import { useTranslation } from "@/hooks/useTranslation";
-import {
-  LanguagesIcon,
-  Loader2Icon,
-  MessageSquareWarningIcon,
-} from "lucide-react";
 import { useState } from "react";
 
 type Props = {
@@ -50,34 +45,17 @@ export const MessageItem = ({ message, sent, feedback }: Props) => {
           >
             <TextRenderer text={message} />
 
-            <div className="flex gap-4 items-center">
-              <SpeakButton text={message} />
-
-              <div
-                aria-disabled={translation.loading}
-                onClick={handleTranslationButtonClick}
-                className="cursor-pointer flex gap-1 items-center text-xs font-thin text-black p-[0.5]"
-              >
-                {translation.loading ? (
-                  <>
-                    <Loader2Icon className="animate-spin w-3 h-3" /> Translating
-                  </>
-                ) : (
-                  <>
-                    <LanguagesIcon className="w-3 h-3" /> Translate
-                  </>
-                )}
-              </div>
-
-              {!sent && feedback && (
-                <div
-                  onClick={handleFeedbackButtonClick}
-                  className="cursor-pointer flex gap-1 items-center text-xs font-thin text-black p-[0.5]"
-                >
-                  <MessageSquareWarningIcon className="w-3 h-3" /> Feedback
-                </div>
-              )}
-            </div>
+            <ActionBar
+              message={message}
+              translation={{
+                loading: translation.loading,
+                onClick: handleTranslationButtonClick,
+              }}
+              feedback={{
+                show: !sent && Boolean(feedback),
+                onClick: handleFeedbackButtonClick,
+              }}
+            />
           </div>
 
           {/* Translated msg */}
