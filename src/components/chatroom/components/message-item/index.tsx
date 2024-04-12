@@ -53,7 +53,10 @@ export const MessageItem = ({ message, sent, feedback }: Props) => {
               !showUserMsgTranslation && !showFeedback && "rounded-b-lg"
             } flex flex-col gap-2`}
           >
-            <TextRenderer text={message} />
+            <TextRenderer
+              text={message}
+              className={showFeedback ? "text-red-400" : ""}
+            />
 
             <ActionBar
               message={message}
@@ -83,7 +86,10 @@ export const MessageItem = ({ message, sent, feedback }: Props) => {
                   !showFeedbackTranslation && "rounded-b-lg"
                 }`}
               >
-                <TextRenderer text={feedback.content} />
+                <TextRenderer
+                  text={feedback.content}
+                  className="text-green-500"
+                />
 
                 <ActionBar
                   message={feedback.content}
@@ -104,7 +110,9 @@ export const MessageItem = ({ message, sent, feedback }: Props) => {
           )}
         </div>
 
-        <span className="flex gap-1 text-xs">✅ Good</span>
+        {!sent && feedback && (
+          <span className="flex gap-1 text-xs">✅ Good</span>
+        )}
       </div>
     </div>
   );

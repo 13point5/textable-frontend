@@ -32,7 +32,7 @@ export const WordRenderer = ({ word, position }: WordProps) => {
     <span className="relative">
       <span
         onClick={handleWordClick}
-        className={`cursor-pointer ${isChosenWord && "text-blue-500"}`}
+        className={`cursor-pointer ${isChosenWord && "text-orange-500"}`}
       >
         {word}
       </span>

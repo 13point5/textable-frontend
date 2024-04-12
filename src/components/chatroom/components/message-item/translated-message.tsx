@@ -28,7 +28,9 @@ export const TranslatedMessage = ({ data, className = "" }: Props) => {
       )}
 
       {data.error && (
-        <div className="p-2 bg-red-100 text-red-500 rounded-b-lg">
+        <div
+          className={cn(`p-2 bg-red-100 text-red-500 rounded-b-lg`, className)}
+        >
           <p className="text-sm">{data.error}</p>
         </div>
       )}
