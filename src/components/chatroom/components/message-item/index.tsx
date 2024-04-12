@@ -16,19 +16,30 @@ type Props = {
 export const MessageItem = ({ message, sent, feedback }: Props) => {
   const profileColor = sent ? "bg-green-300" : "bg-blue-300";
 
-  const [showTranslation, setShowTranslation] = useState(false);
-  const { translation, translate } = useTranslation();
-
   const [showFeedback, setShowFeedback] = useState(false);
+
+  const [showUserMsgTranslation, setShowUserMsgTranslation] = useState(false);
+  const { translation: userMsgTranslation, translate: translateUserMsg } =
+    useTranslation();
 
   const handleFeedbackButtonClick = () => {
     setShowFeedback((prev) => !prev);
   };
 
-  const handleTranslationButtonClick = async () => {
-    await translate();
+  const handleUserMsgTranslationButtonClick = async () => {
+    await translateUserMsg();
 
-    setShowTranslation((prev) => !prev);
+    setShowUserMsgTranslation((prev) => !prev);
+  };
+
+  const [showFeedbackTranslation, setShowFeedbackTranslation] = useState(false);
+  const { translation: feedbackTranslation, translate: translateFeedback } =
+    useTranslation();
+
+  const handleFeedbackTranslationButtonClick = async () => {
+    await translateFeedback();
+
+    setShowFeedbackTranslation((prev) => !prev);
   };
 
   return (
@@ -40,7 +51,7 @@ export const MessageItem = ({ message, sent, feedback }: Props) => {
           {/* Message */}
           <div
             className={`p-2 bg-slate-100 rounded-t-lg ${
-              !showTranslation && "rounded-b-lg"
+              !showUserMsgTranslation && "rounded-b-lg"
             } flex flex-col gap-2`}
           >
             <TextRenderer text={message} />
@@ -48,8 +59,8 @@ export const MessageItem = ({ message, sent, feedback }: Props) => {
             <ActionBar
               message={message}
               translation={{
-                loading: translation.loading,
-                onClick: handleTranslationButtonClick,
+                loading: userMsgTranslation.loading,
+                onClick: handleUserMsgTranslationButtonClick,
               }}
               feedback={{
                 show: !sent && Boolean(feedback),
@@ -58,20 +69,40 @@ export const MessageItem = ({ message, sent, feedback }: Props) => {
             />
           </div>
 
-          {/* Translated msg */}
-          {showTranslation && (
+          {showUserMsgTranslation && (
             <TranslatedMessage
-              data={translation}
+              data={userMsgTranslation}
               className={showFeedback ? "rounded-none" : ""}
             />
           )}
 
           {/* Feedback */}
-          {/* {showFeedback && (
-            <div className="p-2 bg-slate-100 flex flex-col gap-2">
-              <span className="text-sm">{feedback?.content}</span>
-            </div>
-          )} */}
+          {showFeedback && feedback && (
+            <>
+              <div
+                className={`p-2 bg-slate-100 flex flex-col gap-2 ${
+                  !showFeedbackTranslation && "rounded-b-lg"
+                }`}
+              >
+                <TextRenderer text={feedback.content} />
+
+                <ActionBar
+                  message={feedback.content}
+                  translation={{
+                    loading: feedbackTranslation.loading,
+                    onClick: handleFeedbackTranslationButtonClick,
+                  }}
+                />
+              </div>
+
+              {showFeedbackTranslation && (
+                <TranslatedMessage
+                  data={feedbackTranslation}
+                  className="rounded-b-lg"
+                />
+              )}
+            </>
+          )}
         </div>
 
         <span className="flex gap-1 text-xs">✅ Good</span>

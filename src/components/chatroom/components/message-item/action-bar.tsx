@@ -11,7 +11,7 @@ type Props = {
     loading: boolean;
     onClick: () => void;
   };
-  feedback: {
+  feedback?: {
     show: boolean;
     onClick: () => void;
   };
@@ -38,7 +38,7 @@ export const ActionBar = ({ message, translation, feedback }: Props) => {
         )}
       </div>
 
-      {feedback.show && (
+      {feedback && feedback.show && (
         <div
           onClick={feedback.onClick}
           className="cursor-pointer flex gap-1 items-center text-xs font-thin text-black p-[0.5]"
