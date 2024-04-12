@@ -8,6 +8,11 @@ export const MessageList = () => {
           <MessageItem
             message={`Message ${index} blalalalalala`}
             sent={index % 2 === 0}
+            feedback={
+              index % 3 === 0
+                ? { grade: "Good", content: `Message ${index} is good` }
+                : null
+            }
           />
         ))}
       </div>

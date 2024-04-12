@@ -1,13 +1,19 @@
 import { APIResponse } from "@/api/types";
+import { cn } from "@/lib/utils";
 import { Loader2Icon } from "lucide-react";
 
-export const TranslatedMessage = ({ data }: { data: APIResponse<string> }) => {
+type Props = {
+  data: APIResponse<string>;
+  className?: string;
+};
+
+export const TranslatedMessage = ({ data, className = "" }: Props) => {
   return (
     <>
       {data.loading && <Loader2Icon className="animate-spin" />}
 
       {data.data && (
-        <div className="p-2 bg-yellow-100 rounded-b-lg">
+        <div className={cn(`p-2 bg-yellow-100 rounded-b-lg`, className)}>
           <p
             className="text-sm"
             style={{
