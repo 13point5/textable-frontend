@@ -17,14 +17,13 @@ export const MessageItem = ({ message, sent, feedback }: Props) => {
   const profileColor = sent ? "bg-green-300" : "bg-blue-300";
 
   const [showFeedback, setShowFeedback] = useState(false);
+  const handleFeedbackButtonClick = () => {
+    setShowFeedback((prev) => !prev);
+  };
 
   const [showUserMsgTranslation, setShowUserMsgTranslation] = useState(false);
   const { translation: userMsgTranslation, translate: translateUserMsg } =
     useTranslation();
-
-  const handleFeedbackButtonClick = () => {
-    setShowFeedback((prev) => !prev);
-  };
 
   const handleUserMsgTranslationButtonClick = async () => {
     await translateUserMsg();
@@ -51,7 +50,7 @@ export const MessageItem = ({ message, sent, feedback }: Props) => {
           {/* Message */}
           <div
             className={`p-2 bg-slate-100 rounded-t-lg ${
-              !showUserMsgTranslation && "rounded-b-lg"
+              !showUserMsgTranslation && !showFeedback && "rounded-b-lg"
             } flex flex-col gap-2`}
           >
             <TextRenderer text={message} />
