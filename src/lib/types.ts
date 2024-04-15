@@ -13,4 +13,5 @@ export type Message = {
 export type MessageFeedback = {
   grade: string;
   content: string;
+  perfect: boolean;
 };

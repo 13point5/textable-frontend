@@ -13,6 +13,7 @@ type Props = {
 };
 
 export const MessageItem = ({ message, role, feedback }: Props) => {
+  console.log("MessageItem", message, role, feedback);
   const [showFeedback, setShowFeedback] = useState(false);
   const handleFeedbackButtonClick = () => {
     setShowFeedback((prev) => !prev);
@@ -68,7 +69,10 @@ export const MessageItem = ({ message, role, feedback }: Props) => {
                 onClick: handleUserMsgTranslationButtonClick,
               }}
               feedback={{
-                show: role === MessageRole.HUMAN && Boolean(feedback),
+                show:
+                  role === MessageRole.HUMAN &&
+                  feedback !== null &&
+                  !feedback.perfect,
                 onClick: handleFeedbackButtonClick,
               }}
             />
