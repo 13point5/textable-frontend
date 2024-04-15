@@ -115,7 +115,6 @@ export const MessageItem = ({ message, role, feedback }: Props) => {
 
         {role === MessageRole.HUMAN && feedback && (
           <FeedbackGrade feedback={feedback} />
-          // <span className="flex gap-1 text-xs">✅ Good</span>
         )}
       </div>
     </div>

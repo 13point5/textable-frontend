@@ -25,21 +25,18 @@ export const WordRenderer = ({ word, position }: WordProps) => {
     chosenWord.lineIndex === position.lineIndex &&
     chosenWord.wordIndex === position.wordIndex;
 
-  const handleWordClick = () => {
-    if (isChosenWord) {
-      setChosenWord(null);
-    } else {
+  const handleWordClick = (open: boolean) => {
+    if (open) {
       setChosenWord(position);
+    } else {
+      setChosenWord(null);
     }
   };
 
   return (
-    <Popover>
+    <Popover onOpenChange={handleWordClick}>
       <PopoverTrigger>
-        <span
-          onClick={handleWordClick}
-          className={`cursor-pointer ${isChosenWord && "text-orange-500"}`}
-        >
+        <span className={`cursor-pointer ${isChosenWord && "text-orange-500"}`}>
           {word}
         </span>
       </PopoverTrigger>
