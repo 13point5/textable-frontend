@@ -44,8 +44,8 @@ export const useTTS = (text: string) => {
             responseType: "blob",
           }
         );
-        const blobUrl = URL.createObjectURL(new Blob([response.data]));
-        const newAudio = new Audio(blobUrl);
+
+        const newAudio = new Audio(URL.createObjectURL(response.data));
         setAudioSrc(newAudio);
         playAudio(newAudio);
       } catch (error) {
