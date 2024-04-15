@@ -31,7 +31,7 @@ export const TranslatedWord = ({ word }: Props) => {
       });
 
       const res = await axiosInstance.post("/translate", {
-        text: "La vie est belle",
+        text: word,
       });
 
       setTranslationData({
