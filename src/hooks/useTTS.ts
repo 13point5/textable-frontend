@@ -50,6 +50,7 @@ export const useTTS = (text: string) => {
         playAudio(newAudio);
       } catch (error) {
         console.error("Error in fetching audio:", error);
+        alert("Error in fetching audio: " + (error as Error).message);
         setPlaying(false);
       } finally {
         setPlaying(false);
