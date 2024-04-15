@@ -1,18 +1,23 @@
 import { MessageItem } from "@/components/chatroom/components/message-item";
+import useChatStore, { RoomId } from "@/lib/chat-store";
 
-export const MessageList = () => {
+type Props = {
+  roomId: RoomId;
+};
+
+export const MessageList = ({ roomId }: Props) => {
+  const messages = useChatStore((state) => state.getMessagesByRoomId(roomId));
+  console.log("messages", messages);
+
   return (
     <div className="flex-1 flex flex-col gap-2 p-2">
       <div className="flex flex-col gap-4 overflow-auto">
-        {Array.from({ length: 20 }).map((_, index) => (
+        {messages.map((message) => (
           <MessageItem
-            message={`Message ${index} blalalalalala`}
-            sent={index % 2 === 0}
-            feedback={
-              index % 3 === 0
-                ? { grade: "Good", content: `Message ${index} is good` }
-                : null
-            }
+            key={message.id}
+            message={message.content}
+            role={message.role}
+            feedback={message.feedback}
           />
         ))}
       </div>

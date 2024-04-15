@@ -1,21 +1,18 @@
 import { ActionBar } from "@/components/chatroom/components/message-item/action-bar";
+import { FeedbackGrade } from "@/components/chatroom/components/message-item/feedback-preview";
 import { TextRenderer } from "@/components/chatroom/components/message-item/text-renderer";
 import { TranslatedMessage } from "@/components/chatroom/components/message-item/translated-message";
 import { useTranslation } from "@/hooks/useTranslation";
+import { MessageFeedback, MessageRole } from "@/lib/types";
 import { useState } from "react";
 
 type Props = {
   message: string;
-  sent: boolean;
-  feedback: {
-    grade: string;
-    content: string;
-  } | null;
+  role: MessageRole;
+  feedback: MessageFeedback | null;
 };
 
-export const MessageItem = ({ message, sent, feedback }: Props) => {
-  const profileColor = sent ? "bg-green-300" : "bg-blue-300";
-
+export const MessageItem = ({ message, role, feedback }: Props) => {
   const [showFeedback, setShowFeedback] = useState(false);
   const handleFeedbackButtonClick = () => {
     setShowFeedback((prev) => !prev);
@@ -26,7 +23,7 @@ export const MessageItem = ({ message, sent, feedback }: Props) => {
     useTranslation();
 
   const handleUserMsgTranslationButtonClick = async () => {
-    await translateUserMsg();
+    await translateUserMsg(message);
 
     setShowUserMsgTranslation((prev) => !prev);
   };
@@ -36,14 +33,20 @@ export const MessageItem = ({ message, sent, feedback }: Props) => {
     useTranslation();
 
   const handleFeedbackTranslationButtonClick = async () => {
-    await translateFeedback();
+    if (!feedback) return;
+
+    await translateFeedback(feedback.content);
 
     setShowFeedbackTranslation((prev) => !prev);
   };
 
   return (
-    <div className={`flex gap-2 ${!sent && "justify-end"}`}>
-      {sent && <div className={`w-8 h-8 rounded-full ${profileColor}`} />}
+    <div
+      className={`flex gap-2 ${role === MessageRole.HUMAN && "justify-end"}`}
+    >
+      {role === MessageRole.AI && (
+        <div className={`w-8 h-8 rounded-full bg-green-300`} />
+      )}
 
       <div className="flex flex-col gap-1 items-end max-w[50%]">
         <div className="w-full">
@@ -65,7 +68,7 @@ export const MessageItem = ({ message, sent, feedback }: Props) => {
                 onClick: handleUserMsgTranslationButtonClick,
               }}
               feedback={{
-                show: !sent && Boolean(feedback),
+                show: role === MessageRole.HUMAN && Boolean(feedback),
                 onClick: handleFeedbackButtonClick,
               }}
             />
@@ -110,8 +113,9 @@ export const MessageItem = ({ message, sent, feedback }: Props) => {
           )}
         </div>
 
-        {!sent && feedback && (
-          <span className="flex gap-1 text-xs">✅ Good</span>
+        {role === MessageRole.HUMAN && feedback && (
+          <FeedbackGrade feedback={feedback} />
+          // <span className="flex gap-1 text-xs">✅ Good</span>
         )}
       </div>
     </div>

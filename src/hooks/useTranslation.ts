@@ -9,7 +9,7 @@ export const useTranslation = () => {
     data: null,
   });
 
-  const translate = async () => {
+  const translate = async (message: string) => {
     if (!translation.data || translation.loading) {
       try {
         setTranslation({
@@ -19,7 +19,7 @@ export const useTranslation = () => {
         });
 
         const res = await axiosInstance.post("/translate", {
-          text: "La vie est belle",
+          text: message,
         });
 
         setTranslation({
