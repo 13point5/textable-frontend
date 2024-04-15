@@ -1,10 +1,10 @@
-import { useTextToSpeech } from "@/hooks/useTextToSpeech";
+import { useTTS } from "@/hooks/useTTS";
 import { CircleStopIcon, Volume2Icon } from "lucide-react";
 
 type SpeakButtonProps = { text: string };
 
 const SpeakButton = ({ text }: SpeakButtonProps) => {
-  const { playing, handlePlay, handleStop } = useTextToSpeech(text);
+  const { playing, handlePlay, handleStop } = useTTS(text);
 
   return (
     <div
