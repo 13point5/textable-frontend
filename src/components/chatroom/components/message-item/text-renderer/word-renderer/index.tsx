@@ -36,12 +36,13 @@ export const WordRenderer = ({ word, position }: WordProps) => {
   return (
     <Popover onOpenChange={handleWordClick}>
       <PopoverTrigger>
-        <span className={`cursor-pointer ${isChosenWord && "text-orange-500"}`}>
+        <span className={`cursor-pointer ${isChosenWord && "font-bold"}`}>
           {word}
         </span>
       </PopoverTrigger>
 
-      <PopoverContent className="bg-orange-200 border-none p-2 rounded-sm text-xs w-max flex flex-col items-center gap-2 mx-2">
+      {/* <PopoverContent className="bg-orange-200 border-none p-2 rounded-sm text-xs w-max flex flex-col items-center gap-2 mx-2"> */}
+      <PopoverContent className="border-2 border-black bg-white p-2 rounded-sm text-xs w-max flex flex-col items-center gap-2 mx-2">
         <WordRendererPopup word={wordWithoutPunctuation} />
       </PopoverContent>
     </Popover>

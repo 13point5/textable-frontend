@@ -5,6 +5,8 @@ import { TranslatedMessage } from "@/components/chatroom/components/message-item
 import { useTranslation } from "@/hooks/useTranslation";
 import { MessageFeedback, MessageRole } from "@/lib/types";
 import { useState } from "react";
+import BotAvatar from "@/assets/Bot.svg";
+import UserAvatar from "@/assets/User.svg";
 
 type Props = {
   message: string;
@@ -45,8 +47,21 @@ export const MessageItem = ({ message, role, feedback }: Props) => {
     <div
       className={`flex gap-2 ${role === MessageRole.HUMAN && "justify-end"}`}
     >
-      {role === MessageRole.AI && (
+      {/* {role === MessageRole.AI && (
         <div className={`w-8 h-8 rounded-full bg-green-300`} />
+      )} */}
+      {role === MessageRole.AI ? (
+        <img
+          src={BotAvatar}
+          alt="Bot Avatar"
+          className="w-10 h-10 rounded-full"
+        />
+      ) : (
+        <img
+          src={UserAvatar}
+          alt="User Avatar"
+          className="w-10 h-10 rounded-full"
+        />
       )}
 
       <div className="flex flex-col gap-1 items-end max-w[50%]">

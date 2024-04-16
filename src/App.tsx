@@ -1,13 +1,13 @@
+import { useState } from "react";
 import { Chatroom } from "./components/chatroom";
+import { PasswordPage } from "@/PasswordPage";
 
 function App() {
-  return (
-    <Chatroom />
-    // <h1 className="w-screen h-screen flex justify-center">
-    //   <div className="w-full max-w-[500px]">
-    //   </div>
-    // </h1>
-  );
+  const [allowed, setAllowed] = useState(false);
+
+  if (!allowed) return <PasswordPage setAllowed={setAllowed} />;
+
+  return <Chatroom />;
 }
 
 export default App;
