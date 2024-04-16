@@ -50,16 +50,10 @@ export const MessageItem = ({ message, role, feedback }: Props) => {
       {/* {role === MessageRole.AI && (
         <div className={`w-8 h-8 rounded-full bg-green-300`} />
       )} */}
-      {role === MessageRole.AI ? (
+      {role === MessageRole.AI && (
         <img
           src={BotAvatar}
           alt="Bot Avatar"
-          className="w-10 h-10 rounded-full"
-        />
-      ) : (
-        <img
-          src={UserAvatar}
-          alt="User Avatar"
           className="w-10 h-10 rounded-full"
         />
       )}
@@ -136,6 +130,14 @@ export const MessageItem = ({ message, role, feedback }: Props) => {
           <FeedbackGrade feedback={feedback} />
         )}
       </div>
+
+      {role === MessageRole.HUMAN && (
+        <img
+          src={UserAvatar}
+          alt="User Avatar"
+          className="w-10 h-10 rounded-full"
+        />
+      )}
     </div>
   );
 };
