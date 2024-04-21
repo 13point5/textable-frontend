@@ -1,36 +1,25 @@
 import { Tabs } from "@/types";
 import { cn } from "@/lib/utils";
-import {
-  BookOpenIcon,
-  HomeIcon,
-  MessageSquareIcon,
-  UserIcon,
-} from "lucide-react";
+import { GlobeIcon, HomeIcon, MessageSquareIcon } from "lucide-react";
 
 const tabs = [
   {
     id: Tabs.Home,
     label: "Home",
     icon: <HomeIcon size={24} />,
-    className: "bg-red1",
+    className: "bg-green2",
   },
   {
     id: Tabs.Chat,
     label: "Chat",
     icon: <MessageSquareIcon size={24} />,
-    className: "bg-green1",
+    className: "bg-green2",
   },
   {
-    id: Tabs.Learn,
-    label: "Learn",
-    icon: <BookOpenIcon size={24} />,
-    className: "bg-yellow1",
-  },
-  {
-    id: Tabs.Profile,
-    label: "Profile",
-    icon: <UserIcon size={24} />,
-    className: "bg-blue1",
+    id: Tabs.Textoverse,
+    label: "Textoverse",
+    icon: <GlobeIcon size={24} />,
+    className: "bg-green2",
   },
 ];
 

@@ -22,6 +22,7 @@ module.exports = {
         red1: "#E27060",
         red2: "#FFCCC9",
         green1: "#80C39D",
+        green2: "#70A770",
         yellow1: "#F19F34",
         blue1: "#84A7FC",
         botMsg: "bg-slate-100",

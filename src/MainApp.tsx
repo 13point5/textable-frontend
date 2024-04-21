@@ -1,5 +1,5 @@
 import { BottomNavBar } from "@/components/BottomNavBar";
-import { Chatroom } from "@/components/chatroom";
+import ChatTab from "@/components/chat-tab";
 import HomeTab from "@/components/home-tab";
 import { Tabs } from "@/types";
 import { useState } from "react";
@@ -10,7 +10,7 @@ const MainApp = () => {
   return (
     <div className="flex flex-col h-screen max-h-screen">
       {activeTab === Tabs.Home && <HomeTab />}
-      {activeTab === Tabs.Chat && <Chatroom />}
+      {activeTab === Tabs.Chat && <ChatTab />}
       <BottomNavBar activeTab={activeTab} onTabChange={setActiveTab} />
     </div>
   );
