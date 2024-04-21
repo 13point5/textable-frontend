@@ -18,7 +18,9 @@ module.exports = {
     },
     extend: {
       colors: {
+        bg1: "#FBFBFB",
         red1: "#E27060",
+        red2: "#FFCCC9",
         green1: "#80C39D",
         yellow1: "#F19F34",
         blue1: "#84A7FC",
@@ -79,6 +81,7 @@ module.exports = {
     },
     fontFamily: {
       h1: ["Luckiest Guy", "cursive"],
+      h2: ["Kite One", "sans-serif"],
     },
   },
   plugins: [require("tailwindcss-animate")],
