@@ -18,6 +18,10 @@ module.exports = {
     },
     extend: {
       colors: {
+        red1: "#E27060",
+        green1: "#80C39D",
+        yellow1: "#F19F34",
+        blue1: "#84A7FC",
         botMsg: "bg-slate-100",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -72,6 +76,9 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+    },
+    fontFamily: {
+      h1: ["Luckiest Guy", "cursive"],
     },
   },
   plugins: [require("tailwindcss-animate")],

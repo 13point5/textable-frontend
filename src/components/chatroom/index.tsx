@@ -21,7 +21,7 @@ export const Chatroom = () => {
   }, []);
 
   return (
-    <div className="flex flex-col h-screen max-h-screen overflow-hidden">
+    <div className="flex flex-col flex-1 h-full max-h-full overflow-hidden relative">
       <div className="fixed top-0 w-full z-10">
         <Header />
       </div>
@@ -30,7 +30,7 @@ export const Chatroom = () => {
         <MessageList roomId={roomId} />
       </div>
 
-      <div className="fixed bottom-0 w-full z-10">
+      <div className="w-full z-10">
         <MessageComposer roomId={roomId} />
       </div>
     </div>
