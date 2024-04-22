@@ -1,4 +1,5 @@
-import { CirclePlusIcon, HeartIcon } from "lucide-react";
+import useHomeStore from "@/lib/home-store";
+import { CirclePlusIcon, HeartIcon, SendIcon } from "lucide-react";
 
 type Props = {
   avatar: string;
@@ -17,6 +18,12 @@ export const MomentCard = ({
   likes,
   img,
 }: Props) => {
+  const openSendPostDialog = useHomeStore((state) => state.openSendPostDialog);
+
+  const handleOpenSendPostDialog = () => {
+    openSendPostDialog(img);
+  };
+
   return (
     <div className="flex gap-4">
       <img src={avatar} alt="Bot Avatar" className="w-10 h-10 rounded-full" />
@@ -38,6 +45,8 @@ export const MomentCard = ({
             </div>
 
             <CirclePlusIcon className="w-4 h-4" />
+
+            <SendIcon onClick={handleOpenSendPostDialog} className="w-4 h-4" />
           </div>
         </div>
       </div>

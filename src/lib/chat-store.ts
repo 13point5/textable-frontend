@@ -1,6 +1,7 @@
 import { Message, MessageFeedback, MessageRole } from "@/lib/types";
 import { create } from "zustand";
 import { produce } from "immer";
+import { nanoid } from "nanoid";
 
 export type RoomId = string;
 
@@ -18,9 +19,34 @@ type Store = {
   ): void;
 };
 
-const useStore = create<Store>()((set, get) => ({
+const useChatStore = create<Store>()((set, get) => ({
   roomIds: [],
-  messagesByRoomId: {},
+  messagesByRoomId: {
+    redbot: [
+      {
+        id: nanoid(),
+        role: MessageRole.AI,
+        content: "Salut! Tu as fait quoi aujourd’hui?",
+        feedback: null,
+      },
+    ],
+    greenbot: [
+      {
+        id: nanoid(),
+        role: MessageRole.AI,
+        content: "Salut! Tu as fait quoi aujourd’hui?",
+        feedback: null,
+      },
+    ],
+    purplebot: [
+      {
+        id: nanoid(),
+        role: MessageRole.AI,
+        content: "Salut! Tu as fait quoi aujourd’hui?",
+        feedback: null,
+      },
+    ],
+  },
 
   getMessagesByRoomId: (roomId) => get().messagesByRoomId[roomId] || [],
 
@@ -82,4 +108,4 @@ const useStore = create<Store>()((set, get) => ({
   },
 }));
 
-export default useStore;
+export default useChatStore;

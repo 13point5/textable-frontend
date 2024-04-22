@@ -1,6 +1,6 @@
 import { Tabs } from "@/types";
 import { cn } from "@/lib/utils";
-import { GlobeIcon, HomeIcon, MessageSquareIcon } from "lucide-react";
+import { HomeIcon, MessageSquareIcon } from "lucide-react";
 
 const tabs = [
   {
@@ -15,12 +15,12 @@ const tabs = [
     icon: <MessageSquareIcon size={24} />,
     className: "bg-green2",
   },
-  {
-    id: Tabs.Textoverse,
-    label: "Textoverse",
-    icon: <GlobeIcon size={24} />,
-    className: "bg-green2",
-  },
+  // {
+  //   id: Tabs.Textoverse,
+  //   label: "Textoverse",
+  //   icon: <GlobeIcon size={24} />,
+  //   className: "bg-green2",
+  // },
 ];
 
 type BottomNavBarProps = {
@@ -30,7 +30,7 @@ type BottomNavBarProps = {
 
 export const BottomNavBar = ({ activeTab, onTabChange }: BottomNavBarProps) => {
   return (
-    <div className="w-full bg-white border-t-2 flex gap-4 items-center justify-between p-2">
+    <div className="w-full bg-white border-t flex gap-4 items-center justify-center p-2">
       {tabs.map((tab) => (
         <NavItem
           key={tab.id}

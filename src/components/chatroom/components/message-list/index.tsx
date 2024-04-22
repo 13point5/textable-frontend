@@ -14,6 +14,7 @@ export const MessageList = ({ roomId }: Props) => {
       <div className="flex flex-col gap-4 overflow-auto">
         {messages.map((message) => (
           <MessageItem
+            roomId={roomId}
             key={message.id}
             message={message.content}
             role={message.role}

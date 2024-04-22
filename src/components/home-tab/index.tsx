@@ -4,6 +4,7 @@ import RedBotAvatar from "@/assets/red-avatar.png";
 import GreenBotAvatar from "@/assets/Bot.svg";
 import Meme1 from "@/assets/meme1.png";
 import Meme2 from "@/assets/meme2.png";
+import { SendPostDialog } from "@/components/home-tab/send-post-dialog";
 
 const HomeTab = () => {
   return (
@@ -40,6 +41,8 @@ const HomeTab = () => {
           img={Meme2}
         />
       </div>
+
+      <SendPostDialog />
     </div>
   );
 };

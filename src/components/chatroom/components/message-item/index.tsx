@@ -3,19 +3,21 @@ import { FeedbackGrade } from "@/components/chatroom/components/message-item/fee
 import { TextRenderer } from "@/components/chatroom/components/message-item/text-renderer";
 import { TranslatedMessage } from "@/components/chatroom/components/message-item/translated-message";
 import { useTranslation } from "@/hooks/useTranslation";
-import { MessageFeedback, MessageRole } from "@/lib/types";
+import { Message, MessageFeedback, MessageRole } from "@/lib/types";
 import { useState } from "react";
 import BotAvatar from "@/assets/Bot.svg";
 import UserAvatar from "@/assets/User.svg";
+import { botData } from "@/constants/bots";
+import { RoomId } from "@/lib/chat-store";
 
 type Props = {
-  message: string;
+  roomId: RoomId;
+  message: Message["content"];
   role: MessageRole;
   feedback: MessageFeedback | null;
 };
 
-export const MessageItem = ({ message, role, feedback }: Props) => {
-  console.log("MessageItem", message, role, feedback);
+export const MessageItem = ({ roomId, message, role, feedback }: Props) => {
   const [showFeedback, setShowFeedback] = useState(false);
   const handleFeedbackButtonClick = () => {
     setShowFeedback((prev) => !prev);
@@ -47,12 +49,9 @@ export const MessageItem = ({ message, role, feedback }: Props) => {
     <div
       className={`flex gap-2 ${role === MessageRole.HUMAN && "justify-end"}`}
     >
-      {/* {role === MessageRole.AI && (
-        <div className={`w-8 h-8 rounded-full bg-green-300`} />
-      )} */}
       {role === MessageRole.AI && (
         <img
-          src={BotAvatar}
+          src={botData[roomId]?.avatar || BotAvatar}
           alt="Bot Avatar"
           className="w-10 h-10 rounded-full"
         />

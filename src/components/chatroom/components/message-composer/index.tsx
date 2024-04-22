@@ -22,7 +22,6 @@ export const MessageComposer = ({ roomId }: Props) => {
       addBotResponseAndFeedback: state.addBotResponseAndFeedback,
     })
   );
-  console.log("1 messages", messages);
 
   const handleSendMessage: React.FormEventHandler<HTMLFormElement> = async (
     e
@@ -42,12 +41,10 @@ export const MessageComposer = ({ roomId }: Props) => {
       addMessage(roomId, newMessage);
       setInputValue("");
 
-      console.log("2 messages", messages);
-
       const res = await axiosInstance.post("/chat", {
+        roomId,
         messages: [...messages, newMessage],
       });
-      console.log("res", res);
 
       addBotResponseAndFeedback(roomId, res.data.response, res.data.feedback);
     } catch (error) {
@@ -64,14 +61,14 @@ export const MessageComposer = ({ roomId }: Props) => {
   return (
     <form
       onSubmit={handleSendMessage}
-      className="flex gap-2 items-center p-2 bg-slate-50"
+      className="flex gap-2 items-center p-2 bg-white border-t"
     >
       <input
         value={inputValue}
         onChange={handleInputValueChange}
         type="text"
         placeholder="Type a message..."
-        className="flex-1 p-2 bg-slate-50 rounded-lg"
+        className="flex-1 p-2 rounded-lg"
       />
 
       <Button type="submit" disabled={loading} variant="default" size="icon">
