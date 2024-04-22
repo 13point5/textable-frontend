@@ -26,7 +26,7 @@ const useChatStore = create<Store>()((set, get) => ({
       {
         id: nanoid(),
         role: MessageRole.AI,
-        content: "Salut! Tu as fait quoi aujourd’hui?",
+        content: { text: "Salut! Tu as fait quoi aujourd’hui?", images: [] },
         feedback: null,
       },
     ],
@@ -34,7 +34,7 @@ const useChatStore = create<Store>()((set, get) => ({
       {
         id: nanoid(),
         role: MessageRole.AI,
-        content: "Salut! Tu as fait quoi aujourd’hui?",
+        content: { text: "Salut! Tu as fait quoi aujourd’hui?", images: [] },
         feedback: null,
       },
     ],
@@ -42,7 +42,7 @@ const useChatStore = create<Store>()((set, get) => ({
       {
         id: nanoid(),
         role: MessageRole.AI,
-        content: "Salut! Tu as fait quoi aujourd’hui?",
+        content: { text: "Salut! Tu as fait quoi aujourd’hui?", images: [] },
         feedback: null,
       },
     ],
@@ -80,7 +80,10 @@ const useChatStore = create<Store>()((set, get) => ({
         state.messagesByRoomId[roomId].push({
           id: String(Date.now()),
           role: MessageRole.AI,
-          content: response,
+          content: {
+            text: response,
+            images: [],
+          },
           feedback: null,
         });
 

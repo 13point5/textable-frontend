@@ -18,6 +18,8 @@ type Props = {
 };
 
 export const MessageItem = ({ roomId, message, role, feedback }: Props) => {
+  const messageText = message.text;
+
   const [showFeedback, setShowFeedback] = useState(false);
   const handleFeedbackButtonClick = () => {
     setShowFeedback((prev) => !prev);
@@ -28,7 +30,7 @@ export const MessageItem = ({ roomId, message, role, feedback }: Props) => {
     useTranslation();
 
   const handleUserMsgTranslationButtonClick = async () => {
-    await translateUserMsg(message);
+    await translateUserMsg(messageText);
 
     setShowUserMsgTranslation((prev) => !prev);
   };
@@ -66,12 +68,12 @@ export const MessageItem = ({ roomId, message, role, feedback }: Props) => {
             } flex flex-col gap-2`}
           >
             <TextRenderer
-              text={message}
+              text={messageText}
               className={showFeedback ? "text-red-400" : ""}
             />
 
             <ActionBar
-              message={message}
+              message={messageText}
               translation={{
                 loading: userMsgTranslation.loading,
                 onClick: handleUserMsgTranslationButtonClick,

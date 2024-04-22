@@ -1,12 +1,15 @@
 export enum MessageRole {
-  HUMAN = "human",
-  AI = "ai",
+  HUMAN = "user",
+  AI = "assistant",
 }
 
 export type Message = {
   id: string;
   role: MessageRole;
-  content: string;
+  content: {
+    text: string;
+    images: string[];
+  };
   feedback: MessageFeedback | null;
 };
 

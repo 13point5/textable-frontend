@@ -33,7 +33,10 @@ export const MessageComposer = ({ roomId }: Props) => {
 
       const newMessage: Message = {
         id: nanoid(),
-        content: inputValue,
+        content: {
+          text: inputValue,
+          images: [],
+        },
         role: MessageRole.HUMAN,
         feedback: null,
       };
