@@ -3,7 +3,7 @@ import { PasswordPage } from "@/PasswordPage";
 import MainApp from "@/MainApp";
 
 function App() {
-  const [allowed, setAllowed] = useState(true);
+  const [allowed, setAllowed] = useState(false);
 
   if (!allowed) return <PasswordPage setAllowed={setAllowed} />;
 
