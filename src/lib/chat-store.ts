@@ -50,7 +50,10 @@ const useChatStore = create<Store>()((set, get) => ({
       {
         id: nanoid(),
         role: MessageRole.AI,
-        content: { text: "Salut! Tu as fait quoi aujourd’hui?", images: [] },
+        content: {
+          text: "Si tu devais garder que trois aliments, tu garderais lesquels?",
+          images: [],
+        },
         feedback: null,
       },
     ],
@@ -58,7 +61,7 @@ const useChatStore = create<Store>()((set, get) => ({
       {
         id: nanoid(),
         role: MessageRole.AI,
-        content: { text: "Salut! Tu as fait quoi aujourd’hui?", images: [] },
+        content: { text: "Et toi, tu vas souvent au musée?", images: [] },
         feedback: null,
       },
     ],
@@ -66,7 +69,10 @@ const useChatStore = create<Store>()((set, get) => ({
       {
         id: nanoid(),
         role: MessageRole.AI,
-        content: { text: "Salut! Tu as fait quoi aujourd’hui?", images: [] },
+        content: {
+          text: "Et toi, tu as un petit déjeuner préféré?",
+          images: [],
+        },
         feedback: null,
       },
     ],
