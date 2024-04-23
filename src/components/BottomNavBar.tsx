@@ -1,6 +1,6 @@
 import { Tabs } from "@/types";
 import { cn } from "@/lib/utils";
-import { HomeIcon, MessageSquareIcon } from "lucide-react";
+import { GlobeIcon, HomeIcon, MessageSquareIcon } from "lucide-react";
 
 const tabs = [
   {
@@ -15,12 +15,12 @@ const tabs = [
     icon: <MessageSquareIcon size={24} />,
     className: "bg-green2",
   },
-  // {
-  //   id: Tabs.Textoverse,
-  //   label: "Textoverse",
-  //   icon: <GlobeIcon size={24} />,
-  //   className: "bg-green2",
-  // },
+  {
+    id: Tabs.Textoverse,
+    label: "Verse",
+    icon: <GlobeIcon size={24} />,
+    className: "bg-green2",
+  },
 ];
 
 type BottomNavBarProps = {
