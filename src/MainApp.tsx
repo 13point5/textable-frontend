@@ -1,11 +1,14 @@
 import { BottomNavBar } from "@/components/BottomNavBar";
 import ChatTab from "@/components/chat-tab";
 import HomeTab from "@/components/home-tab";
+import useHomeStore from "@/lib/home-store";
 import { Tabs } from "@/types";
-import { useState } from "react";
 
 const MainApp = () => {
-  const [activeTab, setActiveTab] = useState<Tabs>(Tabs.Home);
+  const { activeTab, setActiveTab } = useHomeStore((state) => ({
+    activeTab: state.activeTab,
+    setActiveTab: state.setActiveTab,
+  }));
 
   return (
     <div className="flex flex-col h-screen max-h-screen">

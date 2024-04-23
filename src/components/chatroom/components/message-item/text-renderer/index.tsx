@@ -14,7 +14,6 @@ type TextRendererProps = {
 export const TextRenderer = ({ text, className = "" }: TextRendererProps) => {
   // Split the text by newlines, then process those lines to account for words, spaces, and punctuation
   const lines = text.split("\n");
-  console.log("lines", lines);
 
   const [chosenWord, setChosenWord] = useState<ChosenWord>(null);
 
@@ -26,7 +25,6 @@ export const TextRenderer = ({ text, className = "" }: TextRendererProps) => {
           const wordsAndPunctuations =
             line.match(/[\p{L}']+[.,!?;]?|\s+/gu) || [];
 
-          console.log("wordsAndPunctuations", wordsAndPunctuations);
           return (
             <React.Fragment key={lineIndex}>
               {wordsAndPunctuations.map((wordOrPunctuation, index) =>

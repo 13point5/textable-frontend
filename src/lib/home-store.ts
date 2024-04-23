@@ -1,7 +1,11 @@
 import { create } from "zustand";
 import { produce } from "immer";
+import { Tabs } from "@/types";
 
 type Store = {
+  activeTab: Tabs;
+  setActiveTab(tab: Tabs): void;
+
   sendPostDialog: {
     isOpen: boolean;
     data: null | {
@@ -13,6 +17,15 @@ type Store = {
 };
 
 const useHomeStore = create<Store>()((set) => ({
+  activeTab: Tabs.Home,
+  setActiveTab: (tab: Tabs) => {
+    set(
+      produce((state: Store) => {
+        state.activeTab = tab;
+      })
+    );
+  },
+
   sendPostDialog: {
     isOpen: false,
     data: null,

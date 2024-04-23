@@ -1,13 +1,15 @@
 import RedBot from "@/assets/red-avatar.svg";
 import GreenBot from "@/assets/green-avatar.svg";
 import PurpleBot from "@/assets/purple-bot.svg";
-import { useState } from "react";
 import { Chatroom } from "@/components/chatroom";
-import { RoomId } from "@/lib/chat-store";
+import useChatStore from "@/lib/chat-store";
 import { botData } from "@/constants/bots";
 
 const ChatTab = () => {
-  const [selectedRoomId, setSelectedRoomId] = useState<RoomId | null>(null);
+  const { selectedRoomId, setSelectedRoomId } = useChatStore((state) => ({
+    selectedRoomId: state.selectedRoomId,
+    setSelectedRoomId: state.setSelectedRoomId,
+  }));
 
   if (selectedRoomId)
     return <Chatroom id={selectedRoomId} onChatChange={setSelectedRoomId} />;

@@ -20,7 +20,7 @@ export const MomentCard = ({
 }: Props) => {
   const openSendPostDialog = useHomeStore((state) => state.openSendPostDialog);
 
-  const handleOpenSendPostDialog = () => {
+  const handleOpenSendPostDialog = async () => {
     openSendPostDialog(img);
   };
 

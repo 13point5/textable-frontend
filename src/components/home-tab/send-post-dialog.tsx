@@ -10,46 +10,36 @@ import { Input } from "@/components/ui/input";
 import { botData } from "@/constants/bots";
 import useChatStore, { RoomId } from "@/lib/chat-store";
 import useHomeStore from "@/lib/home-store";
-import { MessageRole } from "@/lib/types";
+import { Tabs } from "@/types";
 import { CircleCheckIcon } from "lucide-react";
-import { nanoid } from "nanoid";
 import { useState } from "react";
 
 export const SendPostDialog = () => {
   const dialogData = useHomeStore((state) => state.sendPostDialog);
-  console.log("dialogData", dialogData);
   const onDialogOpenChange = useHomeStore(
     (state) => state.onSendPostDialogOpenChange
   );
+  const setActiveTab = useHomeStore((state) => state.setActiveTab);
 
   const [recipientRoomId, setRecipientRoomId] = useState<RoomId | null>(null);
 
-  const addMessage = useChatStore((state) => state.addMessage);
+  const chat = useChatStore((state) => state.chat);
+  const setSelectedRoomId = useChatStore((state) => state.setSelectedRoomId);
 
   const [message, setMessage] = useState("");
+
+  const disabled = !recipientRoomId || !message;
 
   const handleMessageInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
   };
 
-  const handleSendMessage = () => {
-    if (!recipientRoomId || !message) return;
+  const handleSendMessage = async () => {
+    if (disabled) return;
 
-    // addMessage(recipientRoomId, {
-    //   id: nanoid(),
-    //   role: MessageRole.HUMAN,
-    //   content: [
-    //     {
-    //       type: "text",
-    //       text: message,
-    //     },
-    //     {
-    //       type: "image_url",
-    //       image_url: dialogData.data?.content || "",
-    //     },
-    //   ],
-    //   feedback: null,
-    // });
+    chat(recipientRoomId, message, []);
+    setSelectedRoomId(recipientRoomId);
+    setActiveTab(Tabs.Chat);
   };
 
   return (
@@ -84,7 +74,11 @@ export const SendPostDialog = () => {
               autoFocus={false}
             />
 
-            <Button onClick={handleSendMessage} className="w-full">
+            <Button
+              onClick={handleSendMessage}
+              disabled={disabled}
+              className="w-full"
+            >
               Send Post
             </Button>
           </DialogDescription>

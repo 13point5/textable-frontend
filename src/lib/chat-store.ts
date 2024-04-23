@@ -1,13 +1,28 @@
-import { Message, MessageFeedback, MessageRole } from "@/lib/types";
+import {
+  ComposerData,
+  Message,
+  MessageFeedback,
+  MessageRole,
+} from "@/lib/types";
 import { create } from "zustand";
 import { produce } from "immer";
 import { nanoid } from "nanoid";
+import { axiosInstance } from "@/api/axios";
 
 export type RoomId = string;
 
 type Store = {
+  selectedRoomId: RoomId | null;
+  setSelectedRoomId(id: RoomId | null): void;
+
   roomIds: RoomId[];
   messagesByRoomId: Record<RoomId, Message[]>;
+  composerDataByRoomId: Record<RoomId, ComposerData>;
+
+  getComposerDataByRoomId(roomId: RoomId): ComposerData;
+  setComposerDataByRoomId(roomId: RoomId, data: Partial<ComposerData>): void;
+
+  chat(roomId: RoomId, text: string, images: string[]): void;
 
   addMessage(roomId: RoomId, message: Message): void;
   getMessagesByRoomId(roomId: RoomId): Message[];
@@ -20,6 +35,15 @@ type Store = {
 };
 
 const useChatStore = create<Store>()((set, get) => ({
+  selectedRoomId: null,
+  setSelectedRoomId: (id) => {
+    set(
+      produce((state: Store) => {
+        state.selectedRoomId = id;
+      })
+    );
+  },
+
   roomIds: [],
   messagesByRoomId: {
     redbot: [
@@ -47,8 +71,75 @@ const useChatStore = create<Store>()((set, get) => ({
       },
     ],
   },
+  composerDataByRoomId: {
+    redbot: {
+      loading: false,
+      inputValue: "",
+    },
+    greenbot: {
+      loading: false,
+      inputValue: "",
+    },
+    purplebot: {
+      loading: false,
+      inputValue: "",
+    },
+  },
+
+  getComposerDataByRoomId: (roomId) =>
+    get().composerDataByRoomId[roomId] || {
+      loading: false,
+      inputValue: "",
+    },
+  setComposerDataByRoomId: (roomId, data) => {
+    set(
+      produce((state) => {
+        state.composerDataByRoomId[roomId] = {
+          ...state.composerDataByRoomId[roomId],
+          ...data,
+        };
+      })
+    );
+  },
 
   getMessagesByRoomId: (roomId) => get().messagesByRoomId[roomId] || [],
+
+  chat: async (roomId, text, images) => {
+    const state = get();
+
+    state.setComposerDataByRoomId(roomId, { loading: true });
+
+    const newMessage: Message = {
+      id: nanoid(),
+      content: {
+        text,
+        images,
+      },
+      role: MessageRole.HUMAN,
+      feedback: null,
+    };
+
+    const messages = state.getMessagesByRoomId(roomId);
+
+    state.addMessage(roomId, newMessage);
+
+    try {
+      const res = await axiosInstance.post("/chat", {
+        roomId,
+        messages: [...messages, newMessage],
+      });
+
+      state.addBotResponseAndFeedback(
+        roomId,
+        res.data.response,
+        res.data.feedback
+      );
+    } catch (error) {
+      console.error(error);
+    } finally {
+      state.setComposerDataByRoomId(roomId, { loading: false });
+    }
+  },
 
   addMessage: (roomId, message) => {
     set(

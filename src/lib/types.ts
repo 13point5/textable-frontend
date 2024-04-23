@@ -18,3 +18,8 @@ export type MessageFeedback = {
   content: string;
   perfect: boolean;
 };
+
+export type ComposerData = {
+  loading: boolean;
+  inputValue: string;
+};

@@ -1,60 +1,31 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRightIcon, Loader2Icon } from "lucide-react";
 import useChatStore, { RoomId } from "@/lib/chat-store";
-import { Message, MessageRole } from "@/lib/types";
-import { nanoid } from "nanoid";
-import { useState } from "react";
-import { axiosInstance } from "@/api/axios";
 
 type Props = {
   roomId: RoomId;
 };
 
 export const MessageComposer = ({ roomId }: Props) => {
-  const [inputValue, setInputValue] = useState("");
-
-  const [loading, setLoading] = useState(false);
-
-  const { addMessage, addBotResponseAndFeedback, messages } = useChatStore(
-    (state) => ({
-      messages: state.getMessagesByRoomId(roomId),
-      addMessage: state.addMessage,
-      addBotResponseAndFeedback: state.addBotResponseAndFeedback,
-    })
+  const { inputValue, loading } = useChatStore((state) =>
+    state.getComposerDataByRoomId(roomId)
   );
+  const setComposerDataByRoomId = useChatStore(
+    (state) => state.setComposerDataByRoomId
+  );
+  const chat = useChatStore((state) => state.chat);
+
+  const setInputValue = (inputValue: string) =>
+    setComposerDataByRoomId(roomId, { inputValue });
 
   const handleSendMessage: React.FormEventHandler<HTMLFormElement> = async (
     e
   ) => {
     e.preventDefault();
 
-    try {
-      setLoading(true);
-
-      const newMessage: Message = {
-        id: nanoid(),
-        content: {
-          text: inputValue,
-          images: [],
-        },
-        role: MessageRole.HUMAN,
-        feedback: null,
-      };
-
-      addMessage(roomId, newMessage);
-      setInputValue("");
-
-      const res = await axiosInstance.post("/chat", {
-        roomId,
-        messages: [...messages, newMessage],
-      });
-
-      addBotResponseAndFeedback(roomId, res.data.response, res.data.feedback);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+    const text = inputValue;
+    setInputValue("");
+    await chat(roomId, text, []);
   };
 
   const handleInputValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
