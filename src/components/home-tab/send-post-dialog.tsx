@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { botData } from "@/constants/bots";
 import useChatStore, { RoomId } from "@/lib/chat-store";
 import useHomeStore from "@/lib/home-store";
+import { convertImageToBase64 } from "@/lib/utils";
 import { Tabs } from "@/types";
 import { CircleCheckIcon } from "lucide-react";
 import { useState } from "react";
@@ -29,17 +30,21 @@ export const SendPostDialog = () => {
   const [message, setMessage] = useState("");
 
   const disabled = !recipientRoomId || !message;
+  const img = dialogData.data?.content;
 
   const handleMessageInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
   };
 
   const handleSendMessage = async () => {
-    if (disabled) return;
+    if (disabled || !img) return;
 
-    chat(recipientRoomId, message, []);
+    const imgBase64 = await convertImageToBase64(img);
+
+    chat(recipientRoomId, message, img ? [imgBase64] : []);
     setSelectedRoomId(recipientRoomId);
     setActiveTab(Tabs.Chat);
+    onDialogOpenChange(false);
   };
 
   return (

@@ -18,6 +18,7 @@ type Props = {
 };
 
 export const MessageItem = ({ roomId, message, role, feedback }: Props) => {
+  console.log("roomId, message, role", roomId, message, role);
   const messageText = message.text;
 
   const [showFeedback, setShowFeedback] = useState(false);
@@ -61,7 +62,16 @@ export const MessageItem = ({ roomId, message, role, feedback }: Props) => {
 
       <div className="flex flex-col gap-1 items-end max-w[50%]">
         <div className="w-full">
-          {/* Message */}
+          <div className="flex flex-col gap-2 mb-2">
+            {message.images.map((imgUrl) => (
+              <img
+                src={imgUrl}
+                alt="Image"
+                className="w-full h-auto rounded-lg"
+              />
+            ))}
+          </div>
+
           <div
             className={`p-2 bg-slate-100 rounded-t-lg ${
               !showUserMsgTranslation && !showFeedback && "rounded-b-lg"
