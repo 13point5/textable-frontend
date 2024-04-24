@@ -3,6 +3,7 @@ import {
   Message,
   MessageFeedback,
   MessageRole,
+  RoomPreview,
 } from "@/lib/types";
 import { create } from "zustand";
 import { produce } from "immer";
@@ -21,6 +22,8 @@ type Store = {
 
   getComposerDataByRoomId(roomId: RoomId): ComposerData;
   setComposerDataByRoomId(roomId: RoomId, data: Partial<ComposerData>): void;
+
+  getRoomPreviews(): RoomPreview[];
 
   chat(roomId: RoomId, text: string, images: string[]): void;
 
@@ -44,7 +47,7 @@ const useChatStore = create<Store>()((set, get) => ({
     );
   },
 
-  roomIds: [],
+  roomIds: ["redbot", "greenbot", "purplebot"],
   messagesByRoomId: {
     redbot: [
       {
@@ -106,6 +109,20 @@ const useChatStore = create<Store>()((set, get) => ({
         };
       })
     );
+  },
+
+  getRoomPreviews: () => {
+    const state = get();
+
+    return state.roomIds.map((roomId) => {
+      const messages = state.messagesByRoomId[roomId];
+      const lastMessageId = messages[messages.length - 1].id;
+
+      return {
+        id: roomId,
+        lastMessageId,
+      };
+    });
   },
 
   getMessagesByRoomId: (roomId) => get().messagesByRoomId[roomId] || [],

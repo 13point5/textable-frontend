@@ -1,3 +1,5 @@
+import { RoomId } from "@/lib/chat-store";
+
 export enum MessageRole {
   HUMAN = "user",
   AI = "assistant",
@@ -22,4 +24,9 @@ export type MessageFeedback = {
 export type ComposerData = {
   loading: boolean;
   inputValue: string;
+};
+
+export type RoomPreview = {
+  id: RoomId;
+  lastMessageId: string;
 };
