@@ -1,6 +1,6 @@
 import { BottomNavBar } from "@/components/BottomNavBar";
 import ChatTab from "@/components/chat-tab";
-import HomeTab from "@/components/home-tab";
+import FeedTab from "@/components/feed-tab";
 import TextoverseTab from "@/components/textoverse-tab";
 import useHomeStore from "@/lib/home-store";
 import { Tabs } from "@/types";
@@ -12,8 +12,8 @@ const MainApp = () => {
   }));
 
   return (
-    <div className="flex flex-col h-screen max-h-screen">
-      {activeTab === Tabs.Home && <HomeTab />}
+    <div className="h-screen max-h-screen overflow-hidden">
+      {activeTab === Tabs.Feed && <FeedTab />}
       {activeTab === Tabs.Chat && <ChatTab />}
       {activeTab === Tabs.Textoverse && <TextoverseTab />}
       <BottomNavBar activeTab={activeTab} onTabChange={setActiveTab} />

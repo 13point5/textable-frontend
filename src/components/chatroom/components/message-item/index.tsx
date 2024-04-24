@@ -1,5 +1,4 @@
 import { ActionBar } from "@/components/chatroom/components/message-item/action-bar";
-import { FeedbackGrade } from "@/components/chatroom/components/message-item/feedback-preview";
 import { TextRenderer } from "@/components/chatroom/components/message-item/text-renderer";
 import { TranslatedMessage } from "@/components/chatroom/components/message-item/translated-message";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -18,7 +17,6 @@ type Props = {
 };
 
 export const MessageItem = ({ roomId, message, role, feedback }: Props) => {
-  console.log("roomId, message, role", roomId, message, role);
   const messageText = message.text;
 
   const [showFeedback, setShowFeedback] = useState(false);
@@ -136,10 +134,6 @@ export const MessageItem = ({ roomId, message, role, feedback }: Props) => {
             </>
           )}
         </div>
-
-        {role === MessageRole.HUMAN && feedback && (
-          <FeedbackGrade feedback={feedback} />
-        )}
       </div>
 
       {role === MessageRole.HUMAN && (

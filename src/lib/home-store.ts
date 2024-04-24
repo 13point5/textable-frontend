@@ -17,7 +17,7 @@ type Store = {
 };
 
 const useHomeStore = create<Store>()((set) => ({
-  activeTab: Tabs.Home,
+  activeTab: Tabs.Feed,
   setActiveTab: (tab: Tabs) => {
     set(
       produce((state: Store) => {

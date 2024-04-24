@@ -7,7 +7,6 @@ type Props = {
 
 export const MessageList = ({ roomId }: Props) => {
   const messages = useChatStore((state) => state.getMessagesByRoomId(roomId));
-  console.log("messages", messages);
 
   return (
     <div className="flex-1 flex flex-col gap-2 p-2">

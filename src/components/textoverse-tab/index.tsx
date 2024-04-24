@@ -5,7 +5,7 @@ const TextoverseTab = () => {
     <img
       src={Textoverse}
       alt="Textoverse"
-      className="flex-1 w-full max-h-full overflow-hidden"
+      className="w-full h-screen max-h-screen pb-[60px] overflow-hidden"
     />
   );
 };

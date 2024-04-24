@@ -1,5 +1,5 @@
 export enum Tabs {
-  Home = "Home",
+  Feed = "Feed",
   Chat = "Chat",
   Textoverse = "Textoverse",
 }
