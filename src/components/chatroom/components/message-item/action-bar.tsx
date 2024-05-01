@@ -1,4 +1,5 @@
 import { SpeakButton } from "@/components/chatroom/components/message-item/speak-button";
+import { RoomId } from "@/lib/chat-store";
 import {
   LanguagesIcon,
   Loader2Icon,
@@ -6,6 +7,7 @@ import {
 } from "lucide-react";
 
 type Props = {
+  roomId: RoomId;
   message: string;
   translation: {
     loading: boolean;
@@ -17,10 +19,15 @@ type Props = {
   };
 };
 
-export const ActionBar = ({ message, translation, feedback }: Props) => {
+export const ActionBar = ({
+  roomId,
+  message,
+  translation,
+  feedback,
+}: Props) => {
   return (
     <div className="flex gap-4 items-center">
-      <SpeakButton text={message} />
+      <SpeakButton text={message} roomId={roomId} />
 
       <div
         aria-disabled={translation.loading}

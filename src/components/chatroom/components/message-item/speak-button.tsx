@@ -1,10 +1,13 @@
 import { CircleStopIcon, Volume2Icon } from "lucide-react";
 import { useTTS } from "@/hooks/useTTS";
+import { RoomId } from "@/lib/chat-store";
+import { botData } from "@/constants/bots";
 
-type Props = { text: string };
+type Props = { text: string; roomId: RoomId };
 
-export const SpeakButton = ({ text }: Props) => {
-  const { playing, handlePlay, handleStop } = useTTS(text);
+export const SpeakButton = ({ text, roomId }: Props) => {
+  const voiceId = botData[roomId]?.voiceId;
+  const { playing, handlePlay, handleStop } = useTTS(text, voiceId);
 
   return (
     <div

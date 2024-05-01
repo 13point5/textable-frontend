@@ -8,14 +8,16 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { RoomId } from "@/lib/chat-store";
 import { useContext } from "react";
 
 type WordProps = {
+  roomId: RoomId;
   word: string;
   position: WordPosition;
 };
 
-export const WordRenderer = ({ word, position }: WordProps) => {
+export const WordRenderer = ({ roomId, word, position }: WordProps) => {
   // Extract the word without punctuation for the popup.
   const wordWithoutPunctuation = word.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "");
 
@@ -43,7 +45,7 @@ export const WordRenderer = ({ word, position }: WordProps) => {
 
       {/* <PopoverContent className="bg-orange-200 border-none p-2 rounded-sm text-xs w-max flex flex-col items-center gap-2 mx-2"> */}
       <PopoverContent className="border-2 border-black bg-white p-2 rounded-sm text-xs w-max flex flex-col items-center gap-2 mx-2">
-        <WordRendererPopup word={wordWithoutPunctuation} />
+        <WordRendererPopup word={wordWithoutPunctuation} roomId={roomId} />
       </PopoverContent>
     </Popover>
   );

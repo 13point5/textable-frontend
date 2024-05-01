@@ -76,11 +76,13 @@ export const MessageItem = ({ roomId, message, role, feedback }: Props) => {
             } flex flex-col gap-2`}
           >
             <TextRenderer
+              roomId={roomId}
               text={messageText}
               className={showFeedback ? "text-red-400" : ""}
             />
 
             <ActionBar
+              roomId={roomId}
               message={messageText}
               translation={{
                 loading: userMsgTranslation.loading,
@@ -112,11 +114,13 @@ export const MessageItem = ({ roomId, message, role, feedback }: Props) => {
                 }`}
               >
                 <TextRenderer
+                  roomId={roomId}
                   text={feedback.content}
                   className="text-green-500"
                 />
 
                 <ActionBar
+                  roomId={roomId}
                   message={feedback.content}
                   translation={{
                     loading: feedbackTranslation.loading,

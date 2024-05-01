@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useState, useCallback } from "react";
 
-export const useTTS = (text: string) => {
+const defaultVoiceId = "29vD33N1CtxCmqQRPOHJ";
+
+export const useTTS = (text: string, voiceId?: string) => {
   const [playing, setPlaying] = useState(false);
   const [audioSrc, setAudioSrc] = useState<HTMLAudioElement | null>(null);
 
@@ -31,7 +33,9 @@ export const useTTS = (text: string) => {
     } else {
       try {
         const response = await axios.post(
-          "https://api.elevenlabs.io/v1/text-to-speech/29vD33N1CtxCmqQRPOHJ",
+          `https://api.elevenlabs.io/v1/text-to-speech/${
+            voiceId || defaultVoiceId
+          }`,
           {
             text,
           },

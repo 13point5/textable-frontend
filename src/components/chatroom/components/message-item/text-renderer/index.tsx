@@ -3,15 +3,21 @@ import {
   TextRendererContext,
 } from "@/components/chatroom/components/message-item/text-renderer/context";
 import { WordRenderer } from "@/components/chatroom/components/message-item/text-renderer/word-renderer";
+import { RoomId } from "@/lib/chat-store";
 import { cn } from "@/lib/utils";
 import React, { useState } from "react";
 
 type TextRendererProps = {
+  roomId: RoomId;
   text: string;
   className?: string;
 };
 
-export const TextRenderer = ({ text, className = "" }: TextRendererProps) => {
+export const TextRenderer = ({
+  roomId,
+  text,
+  className = "",
+}: TextRendererProps) => {
   // Split the text by newlines, then process those lines to account for words, spaces, and punctuation
   const lines = text.split("\n");
 
@@ -30,6 +36,7 @@ export const TextRenderer = ({ text, className = "" }: TextRendererProps) => {
               {wordsAndPunctuations.map((wordOrPunctuation, index) =>
                 /\w/.test(wordOrPunctuation) ? (
                   <WordRenderer
+                    roomId={roomId}
                     key={index}
                     word={wordOrPunctuation}
                     position={{
